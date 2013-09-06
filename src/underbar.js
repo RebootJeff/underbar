@@ -27,11 +27,15 @@ var _ = { };
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    if(n == undefined) {
-        return array[array.length-1];
+      var len = array.length;
+      if(n == undefined) {
+        return array[len - 1];
+      }
+      else if(n > len) {
+        return array;
       }
       else {
-        return array.slice(0,n);
+        return array.slice(len - n,len);
       }
   };
 
