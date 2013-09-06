@@ -42,7 +42,7 @@ var _ = { };
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
-    if(collection.isArray){
+    if(Array.isArray(collection)){
       for(var i = 0; i < collection.length; i++){
         iterator(collection[i],i,collection)
       }
@@ -68,7 +68,7 @@ var _ = { };
     });
 
     // Jeff: WHY is indexOfTarget a string before I convert it via parseFloat?
-    return parseFloat(indexOfTarget);
+    return indexOfTarget;
   };
 
   // Return all elements of an array that pass a truth test.
