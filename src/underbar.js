@@ -75,6 +75,7 @@ var _ = { };
   _.filter = function(collection, iterator) {
     // From Jeff: Comment above says array, but parameter name is "collection"
     // whereas _.indexOf() gets an "array" parameter. Does that mean something?
+    // This comment/question also applies to _.reject().
     var filteredArray = [];
 
     _.each(collection, function(val, index, coll) {
@@ -90,6 +91,9 @@ var _ = { };
   _.reject = function(collection, iterator) {
     // TIP: see if you can re-use _.select() here, without simply
     // copying code in and modifying it
+    return _.filter(collection, function(val){
+      return !(iterator(val));
+    });
   };
 
   // Produce a duplicate-free version of the array.
