@@ -60,12 +60,20 @@ var _ = { };
     // TIP: Here's an example of a function that needs to iterate, which we've
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
+    var indexOfTarget = -1;
+    _.each(array,function(val, index, arr) {
+      if(indexOfTarget === -1 && val === target){
+        indexOfTarget = index;
+      }
+    });
 
+    // Jeff: WHY is indexOfTarget a string before I convert it via parseFloat?
+    return parseFloat(indexOfTarget);
   };
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, iterator) {
-    
+
   };
 
   // Return all elements of an array that don't pass a truth test.
@@ -76,6 +84,7 @@ var _ = { };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+
   };
 
 
