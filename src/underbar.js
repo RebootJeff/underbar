@@ -119,7 +119,7 @@ var _ = { };
 
     _.each(array, function(val, index, arr) {
       mappedArray.push(iterator(val));
-    }
+    });
 
     return mappedArray;
   };
