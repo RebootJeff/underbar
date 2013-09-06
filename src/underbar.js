@@ -20,7 +20,7 @@ var _ = { };
       return array[0];
     }
     else {
-      return array.slice(0,n);
+      return array.slice(0, n);
     }
   };
 
@@ -35,7 +35,7 @@ var _ = { };
       return array;
     }
     else {
-      return array.slice(len - n,len);
+      return array.slice(len - n, len);
     }
   };
 
@@ -43,26 +43,27 @@ var _ = { };
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
     if(Array.isArray(collection)){
-      for(var i = 0; i < collection.length; i++){
-        iterator(collection[i],i,collection)
+      for(var i = 0; i < collection.length; i++) {
+        iterator(collection[i], i, collection)
       }
     }
     else {
-      for(var key in collection){
-        iterator(collection[key],key,collection);
+      for(var key in collection) {
+        iterator(collection[key], key, collection);
       }
     }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
-  _.indexOf = function(array, target){
+  _.indexOf = function(array, target) {
     // TIP: Here's an example of a function that needs to iterate, which we've
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
     var indexOfTarget = -1;
-    _.each(array,function(val, index, arr) {
-      if(indexOfTarget === -1 && val === target){
+
+    _.each(array, function(val, index, arr) {
+      if(indexOfTarget === -1 && val === target) {
         indexOfTarget = index;
       }
     });
@@ -72,7 +73,17 @@ var _ = { };
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, iterator) {
+    // From Jeff: Comment above says array, but parameter name is "collection"
+    // whereas _.indexOf() gets an "array" parameter. Does that mean something?
+    var filteredArray = [];
 
+    _.each(collection, function(val, index, coll) {
+      if(iterator(val)) {
+        filteredArray.push(val);
+      }
+    });
+
+    return filteredArray;
   };
 
   // Return all elements of an array that don't pass a truth test.
