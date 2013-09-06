@@ -67,7 +67,6 @@ var _ = { };
       }
     });
 
-    // Jeff: WHY is indexOfTarget a string before I convert it via parseFloat?
     return indexOfTarget;
   };
 
