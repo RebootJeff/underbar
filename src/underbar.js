@@ -144,6 +144,17 @@ var _ = { };
 
   // Calls the method named by methodName on each value in the list.
   _.invoke = function(list, methodName, args) {
+    // From Jeff: This function is supposed to RETURN something, right?
+    // Sadly, I used a combination of guesswork and underscore.js to
+    // complete this function so I don't truly understand it.
+    return _.map(list, function(value){
+      if(typeof methodName == 'string') {
+        return value[methodName].apply(value, args);
+      }
+      else {
+        return methodName.apply(value, args);
+      }
+    });
   };
 
   // Reduces an array or object to a single value by repetitively calling
@@ -160,6 +171,13 @@ var _ = { };
   //   }, 0); // should be 6
   //
   _.reduce = function(collection, iterator, initialValue) {
+    var result = initialValue || 0;
+
+    _.each(collection, function(item, index, coll) {
+      result = iterator(result, item);
+    });
+
+    return result;
   };
 
   // Determine if the array or object contains a given value (using `===`).
@@ -178,6 +196,11 @@ var _ = { };
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    var truthTest = iterator || function(i) { return i; };
+    
+    return _.reduce(collection, function(testResult, item) {
+      return testResult ?  Boolean(truthTest(item)) : false;
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
