@@ -16,42 +16,42 @@ var _ = { };
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
   _.first = function(array, n) {
-      if(n == undefined) {
-        return array[0];
-      }
-      else {
-        return array.slice(0,n);
-      }
+    if(n == undefined) {
+      return array[0];
+    }
+    else {
+      return array.slice(0,n);
+    }
   };
 
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-      var len = array.length;
-      if(n == undefined) {
-        return array[len - 1];
-      }
-      else if(n > len) {
-        return array;
-      }
-      else {
-        return array.slice(len - n,len);
-      }
+    var len = array.length;
+    if(n == undefined) {
+      return array[len - 1];
+    }
+    else if(n > len) {
+      return array;
+    }
+    else {
+      return array.slice(len - n,len);
+    }
   };
 
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
-      if(collection.isArray){
-        for(var i = 0; i < collection.length; i++){
-          iterator(collection[i],i,collection)
-        }
+    if(collection.isArray){
+      for(var i = 0; i < collection.length; i++){
+        iterator(collection[i],i,collection)
       }
-      else {
-        for(var key in collection){
-          iterator(collection[key],key,collection);
-        }
+    }
+    else {
+      for(var key in collection){
+        iterator(collection[key],key,collection);
       }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -60,10 +60,12 @@ var _ = { };
     // TIP: Here's an example of a function that needs to iterate, which we've
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
+
   };
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, iterator) {
+    
   };
 
   // Return all elements of an array that don't pass a truth test.
