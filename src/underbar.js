@@ -198,15 +198,29 @@ var _ = { };
     // TIP: Try re-using reduce() here.
     var truthTest = iterator || function(i) { return i; };
     
-    return _.reduce(collection, function(testResult, item) {
-      return testResult ?  Boolean(truthTest(item)) : false;
+    return _.reduce(collection, function(prevTestResult, item) {
+      return prevTestResult ? Boolean(truthTest(item)) : false;
     }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
+    // This if-statement only checks for empty array.
+    // It fails to check for empty object.
+    if(collection.length === 0){
+      return false;
+    }
     // TIP: There's a very clever way to re-use every() here.
+    var truthTest = iterator || function(i) { return i; };
+
+    // From Jeff: I have failed to find a way to re-use every().
+    // return _.every(collection, function(item) {
+    //   truthTest(item)
+    // });
+    return _.reduce(collection, function(prevTestResult, item) {
+      return prevTestResult ? true : Boolean(truthTest(item));
+    }, false);
   };
 
 
@@ -229,11 +243,29 @@ var _ = { };
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    for(var i = 1; i < arguments.length; i++) {
+      for(var prop in arguments[i]) {
+        if(arguments[i].hasOwnProperty(prop)) {
+          obj[prop] = arguments[i][prop];
+        }
+      }
+    }
+
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    for(var i = 1; i < arguments.length; i++) {
+      for(var prop in arguments[i]) {
+        if(arguments[i].hasOwnProperty(prop) && !obj.hasOwnProperty(prop)) {
+          obj[prop] = arguments[i][prop];
+        }
+      }
+    }
+
+    return obj;
   };
 
 
