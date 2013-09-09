@@ -306,6 +306,19 @@ var _ = { };
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var alreadyCalled = false;
+    var results = {};
+
+    return function() {
+      // From Jeff: I don't understand why `arguments[0]` is the argument
+      // of func. Shouldn't it be the argument of memoize? In other words,
+      // shouldn't `arguments[0] === func`?
+      var arg = arguments[0];
+      if(!alreadyCalled || !(results.hasOwnProperty(arg))) {
+        results[arg] = func.apply(this, arguments);
+      }
+      return results[arg];
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
