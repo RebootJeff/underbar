@@ -344,8 +344,24 @@ var _ = { };
    * ==============================
    */
 
-  // Shuffle an array.
-  _.shuffle = function(array) {
+    _.shuffle = function(array) {
+    // From Jeff: I don't understand why I had to use _.map() to help declare
+    // shuffledArray. Why couldn't I juse use `shuffledArray = array`?
+    // When I tried that, the _.each() function couldn't manipulate shuffledArray.
+    // It's as if the scope changed.
+    var shuffledArray = _.map(array, function(element){
+      return element;
+    });
+
+    _.each(array, function(element, index, arr){
+      var randIndex = Math.floor(Math.random() * arr.length);
+
+      var temp = shuffledArray[randIndex];
+      shuffledArray[randIndex] = shuffledArray[index];
+      shuffledArray[index] = temp;
+    });
+
+    return shuffledArray;
   };
 
 
