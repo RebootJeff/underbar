@@ -328,6 +328,14 @@ var _ = { };
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = Array.prototype.slice.call(arguments, 2);
+    // From Jeff: I don't quite understand why I need to wrap `func.apply()`
+    // inside a `function() { }` in order for this to work. I also don't
+    // understand why underscore.js even has a delay function when it seems
+    // like it doesn't do much more than setTimeout. Lastly, underscore.js
+    // uses `func.apply(null, args)` whereas I provide `this` as context
+    // for `apply()` ...so clearly I don't understand how the context works.
+    window.setTimeout(function() { func.apply(this, args); },wait);
   };
 
 
